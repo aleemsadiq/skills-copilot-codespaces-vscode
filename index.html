@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2rem;
+        max-width: 520px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .error {
+        color: #c1121f;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Birthday App</h1>
+    <p>Enter the exact date of birth to open the app.</p>
+
+    <label for="dob">Date of birth</label>
+    <input id="dob" name="dob" type="date" />
+    <button id="open-app" type="button">Open</button>
+    <p id="message" class="error" aria-live="polite"></p>
+
+    <section id="app-content" class="hidden">
+      <h2>Welcome 🎉</h2>
+      <p>The app is now unlocked.</p>
+    </section>
+
+    <script>
+      const ALLOWED_BIRTHDAY = "2000-01-01";
+      const dobInput = document.getElementById("dob");
+      const message = document.getElementById("message");
+      const appContent = document.getElementById("app-content");
+
+      document.getElementById("open-app").addEventListener("click", () => {
+        if (dobInput.value === ALLOWED_BIRTHDAY) {
+          message.textContent = "";
+          appContent.classList.remove("hidden");
+          return;
+        }
+
+        appContent.classList.add("hidden");
+        message.textContent = "Access denied. Date of birth does not match.";
+      });
+    </script>
+  </body>
+</html>
